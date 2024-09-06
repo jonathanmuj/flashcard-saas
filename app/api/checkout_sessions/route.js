@@ -1,14 +1,15 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
 const formatAmountForStripe = (amount, currency) => {
     return Math.round(amount * 100)
    }
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2022-11-15',
-})
+
 
 export async function POST(req) {
+  console.log("in the post function")
   try {
     const params = {
         mode: 'subscription',
